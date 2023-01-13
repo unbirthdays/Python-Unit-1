@@ -1,12 +1,15 @@
-entries = []
+import sqlite3
+connection = sqlite3.connect("data.db")
+# connection.row_factory = sqlite3.Row   # USE TO ACCESS AS STRING PROPERTIES
 
-# generally we want to have separate files to interact with the user and work with a data store instead of mixing it here
-def add_entry():
-    entry_content = input("What have you learned today? ")
-    entry_date = input("Enter the date: ")
+def create_table():
+    connection.execute("CREATE TABLE IF NOT EXISTS entries (content TEXT, date TEXT);")
+    connection.commit()
 
-    entries.append({"content": entry_content, "date": entry_date})
+def add_entry(entry_content, entry_date):
+    connection.execute("INSERT INTO entries VALUES (?, ?);", (entry_content, entry_date))
+    connection.commit()
 
-def view_entries():
-    for entry in entries:
-        print(f"{entry['date']}\n{entry['content']}\n\n")
+def get_entries():
+    cursor = connection.execute("SELECT * FROM entries;")
+    return cursor
