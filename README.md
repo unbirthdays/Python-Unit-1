@@ -12,7 +12,7 @@ Student created & worked in conda venv for project
 ### Part 2
 Student created postgresql database in Heroku
 
-### Student successfully connected to db in database.py file
+Student successfully connected to db in database.py file
 
 ### Part 3
 Student successfully created customer table in seed.py file
